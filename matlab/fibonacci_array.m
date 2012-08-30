@@ -1,15 +1,16 @@
-function [total] = fibonacci_array(n)
+function [F, nth_fib] = fibonacci_array(n)
 %FIBONACCI_ARRAY Create an array of n Fibonacci numbers, then sum the even
-%numbers
-    function [nth_fib] = fibonacci(n)
-        if (n == 1)
-            nth_fib = 1; 
-        elseif (n == 2)
-            nth_fib = 2;
+%numbers. The 32nd Fib number is the largest < 4mil. Found by trial and
+%error.
+F = [1 2]
+    function [F, nth_fib] = fibonacci(F, n)
+        if (n <= length(F))
+            nth_fib = F(n); 
         else
-            nth_fib = fibonacci(n-1) + fibonacci(n-2);
+            nth_fib = fibonacci(F, n-1) + fibonacci(F, n-2);
         end
     end
-total = fibonacci(n);
+nth_fib = fibonacci(F, n)
+%total = sum(F(logical(mod(F+1,2))));
 end
 
